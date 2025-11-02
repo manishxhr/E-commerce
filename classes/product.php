@@ -53,6 +53,15 @@ class Product{
         $stmt->bindParam(':status',$status);
         return $stmt->execute();
     }
+
+    public function searchProduct($keyword){
+        $sql="select * from $this->table WHERE name LIKE :keyword OR description LIKE :keyword";
+        $stmt=$this->conn->prepare($sql);
+        $likeKeyword="%$keyword%";
+        $stmt->bindParam(':keyword',$likeKeyword);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 
 

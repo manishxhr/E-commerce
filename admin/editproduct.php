@@ -36,11 +36,11 @@ if (isset($_GET['id'])) {
 
 // Handle update form submission
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+    $name = filter_var($_POST['name'], );
     $price = filter_var($_POST['price'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-    $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+    $description = filter_var($_POST['description']);
     $image = filter_var($_POST['image'], FILTER_SANITIZE_URL);
-    $status = filter_var($_POST['status'], FILTER_SANITIZE_STRING);
+    $status = filter_var($_POST['status']);
 
     if ($product->updateProduct($id, $name, $price, $description, $image, $status)) {
         $message = "Product updated successfully!";

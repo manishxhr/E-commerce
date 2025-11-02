@@ -20,7 +20,16 @@ if(!$admin->isLoggedIn()){
    exit;
 }
 
-$products = $productObj->allProducts();
+//handle search product
+if(isset($_GET['query']) && !empty(trim($_GET['query']))){
+    $keyword=trim($_GET['query']);
+    $products= $productObj->searchProduct($keyword);
+}
+else{
+
+    $products = $productObj->allProducts();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -114,8 +123,8 @@ $products = $productObj->allProducts();
         <li class="nav-item"><a class="nav-link" href="createproduct.php">Add Product</a></li>
       </ul>
 
-      <form class="d-flex search-bar">
-        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+      <form class="d-flex search-bar" method="get">
+        <input class="form-control me-2" type="search" name="query" placeholder="Search products..." aria-label="Search">
         <button class="btn btn-light" type="submit">Search</button>
       </form>
 
